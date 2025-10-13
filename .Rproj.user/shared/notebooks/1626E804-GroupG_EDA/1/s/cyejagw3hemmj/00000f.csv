@@ -1,0 +1,2 @@
+"0","# Scatter Plot"
+"0","pairs(Data, pch = 19, main = ""Scatter Plot"")"

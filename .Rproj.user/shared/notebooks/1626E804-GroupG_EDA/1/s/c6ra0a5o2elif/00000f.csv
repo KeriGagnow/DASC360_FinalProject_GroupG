@@ -1,0 +1,6 @@
+"0","# Predictor Variables"
+"0","X <- StudentDep[, c(""Gender"", ""Age"", ""Academic Pressure"", ""Work Pressure"","
+"0","                    ""CGPA"", ""Dietary Habits"", ""Financial Stress"","
+"0","                    ""Family History of Mental Illness"")]"
+"0","# Response Variables"
+"0","Y <- StudentDep[, c(""Depression"", ""Study Satisfaction"", ""Job Satisfaction"", ""Sleep Duration"")]"
