@@ -1,0 +1,9 @@
+EDA:
+-Missing one dimensional visualizations(bar charts and dot plots)
+-Need to execute the changes that needed to be made to the data
+-Didn't add any conclusions to the correlation calculations
+-Didn't made any conclusions from the outliers that we attempted to find
+EFA:
+-Need to use eigen() to find the intrinisnic dimensionality of the predictor and response variables
+-Need to use pca() to extract orthogonally and obliquely rotated loading matrices
+-Need to use pca() to summarize and interprete the variance and covariances of the rotated loading matrix
