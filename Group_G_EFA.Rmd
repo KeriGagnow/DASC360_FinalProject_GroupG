@@ -12,3 +12,12 @@ library(corrplot)
 library(ggplot2)
 ```
 
+We are going to import the data set that we are exploring the see student mental health in India
+```{r}
+library(readr)
+
+student_depression_dataset_CSV <- read_csv("student_depression_dataset_CSV.csv")
+
+View(student_depression_dataset_CSV)
+```
+
