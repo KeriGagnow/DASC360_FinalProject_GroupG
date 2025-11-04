@@ -13,13 +13,16 @@ library(ggplot2)
 ```
 Importing our dataset into R Markdown:
 ```{r}
-student_depression_dataset <- read_csv("student_depression_dataset_CSV.csv")
-head(student_depression_dataset)
+library(readr)
+
+student_depression_dataset_CSV <- read_csv("student_depression_dataset_CSV.csv")
+
+View(student_depression_dataset_CSV)
 ```
 We found a data set that analyzes mental health trends and predictors among students, which we ended up naming to StudentDep. We reorganized the data so it has 70 cases and 17 variables. Our goal was to make sure that the variables was layed out properly and in a better fit so we could analyze.
 
 ```{r}
-StudentDep <- student_depression_dataset[1:70, c("Gender", "Age", "City", "Profession", "Academic Pressure", "Work Pressure", "CGPA", "Study Satisfaction", "Job Satisfaction", "Sleep Duration", "Dietary Habits", "Degree", "Have you ever had suicidal thoughts ?", "Work/Study Hours", "Financial Stress", "Family History of Mental Illness", "Depression")]
+StudentDep <- student_depression_dataset_CSV[1:70, c("Gender", "Age", "City", "Profession", "Academic_Pressure", "Work_Pressure", "CGPA", "Study_Satisfaction", "Job_Satisfaction", "Sleep_Duration", "Dietary_Habits", "Degree", "Suicidal_Thoughts", "Work/Study_Hours", "Financial_Stress", "Family_History_of_Mental_Illness", "Depression")]
 dim(StudentDep)
 ```
 
@@ -33,13 +36,13 @@ What we did here is converted the categorical variables into numerical form, suc
 StudentDep$Gender <- ifelse(StudentDep$Gender == "Male", 1, 0)
 
 # Also doing this for Family History of Mental Illness converting, binary (Yes = 1, No = 0)
-StudentDep$'Family History of Mental Illness' <- ifelse(StudentDep$'Family History of Mental Illness' == "Yes", 1, 0)
+StudentDep$'Family_History_of_Mental_Illness' <- ifelse(StudentDep$'Family_History_of_Mental_Illness' == "Yes", 1, 0)
 
 # Converting ordinal variables for Dietary Habits and Sleep Duration
-StudentDep$ 'Dietary Habits' <- as.numeric(factor(StudentDep$ 'Dietary Habits',
+StudentDep$ 'Dietary_Habits' <- as.numeric(factor(StudentDep$ 'Dietary_Habits',
                                                   levels = c("Unhealthy", "Average", "Healthy"),
                                                   ordered = TRUE))
-StudentDep$ 'Sleep Duration' <- as.numeric(factor(StudentDep$ 'Sleep Duration',
+StudentDep$ 'Sleep_Duration' <- as.numeric(factor(StudentDep$ 'Sleep_Duration',
                                                   levels = c("<5 hours", "5-6 hours", "6-8 hours", ">8 hours"),
                                                   ordered = TRUE))
 
@@ -54,15 +57,25 @@ summary(StudentDep)
 ```{r}
 dim(StudentDep)
 ```
+We used boxplot to compare Academic Pressure and Study Satisfaction to in a One-Dimensional Graph
+```{r}
+ggplot(StudentDep) + geom_bar(aes(x = Academic_Pressure))
+
+ggplot(StudentDep) + geom_bar(aes(x = Study_Satisfaction))
+```
+
+
+
+
 For here we made sure to have variables that are predictors, and variables that are response variables.
 
 ```{r}
 # Predictor Variables
-X <- StudentDep[, c("Gender", "Age", "Academic Pressure", "Work Pressure",
-                    "CGPA", "Dietary Habits", "Financial Stress",
-                    "Family History of Mental Illness")]
+X <- StudentDep[, c("Gender", "Age", "Academic_Pressure", "Work_Pressure",
+                    "CGPA", "Dietary_Habits", "Financial_Stress",
+                    "Family_History_of_Mental_Illness")]
 # Response Variables
-Y <- StudentDep[, c("Depression", "Study Satisfaction", "Job Satisfaction", "Sleep Duration")]
+Y <- StudentDep[, c("Depression", "Study_Satisfaction", "Job_Satisfaction", "Sleep_Duration")]
 ```
 Used summary instead of describe()
 

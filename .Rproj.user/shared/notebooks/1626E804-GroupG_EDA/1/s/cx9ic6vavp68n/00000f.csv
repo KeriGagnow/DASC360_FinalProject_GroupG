@@ -1,7 +1,0 @@
-"0","StudentDep <- student_depression_dataset[1:70, c(""Gender"", ""Age"", ""City"", ""Profession"", ""Academic Pressure"", ""Work Pressure"", ""CGPA"", ""Study Satisfaction"", ""Job Satisfaction"", ""Sleep Duration"", ""Dietary Habits"", ""Degree"", ""Have you ever had suicidal thoughts ?"", ""Work/Study Hours"", ""Financial Stress"", ""Family History of Mental Illness"", ""Depression"")]"
-"0","dim(StudentDep)"
-"1","[1]"
-"1"," 70"
-"1"," 17"
-"1","
-"
