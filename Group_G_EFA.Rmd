@@ -1,0 +1,14 @@
+---
+title: "Group_G_EFA"
+author: "Oksana Efron, Sabrina Hassan, Keri Gagnow"
+date: "2025-11-04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(readr)
+library(psych)
+library(corrplot)
+library(ggplot2)
+```
+

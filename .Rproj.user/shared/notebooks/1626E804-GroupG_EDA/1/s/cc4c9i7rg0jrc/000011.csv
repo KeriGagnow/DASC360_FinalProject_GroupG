@@ -1,2 +1,0 @@
-"0","student_depression_dataset <- read_csv(""student_depression_dataset_CSV.csv"")"
-"0","head(student_depression_dataset)"
