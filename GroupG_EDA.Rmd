@@ -216,5 +216,12 @@ R_1 <- pca(r = RX, nfactors = 4, rotate = "oblimin")$loadings[]
 print("Oblique Rotation :")
 R_1
 ```
+We will also use correlation plots to visually identify complex dimensions with our rotated loading matrices:
+```{r}
+corrplot(R, method = "circle")
 
+
+corrplot(R_1, method = "circle")
+```
+After visualizing the loading matrices and visualizing them with corrplots, we believe that oblique rotation would not be necessary for this particular data set as the orthogonal rotation and oblique rotation look exactly the same, we no notable differences with complex dimensions. With this in mind, we will be using orthogonal rotation for this data set
 
