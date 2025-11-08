@@ -1,0 +1,69 @@
+```{r}
+library(readr)
+
+student_depression_dataset_CSV <- read_csv("student_depression_dataset_CSV.csv")
+View(student_depression_dataset_CSV)
+
+```
+
+```{r}
+StudentDep <- student_depression_dataset_CSV[1:70, c("Gender", "Age", "City", "Profession", "Academic_Pressure", "Work_Pressure", "CGPA", "Study_Satisfaction", "Job_Satisfaction", "Sleep_Duration", "Dietary_Habits", "Degree", "Suicidal_Thoughts", "Work/Study_Hours", "Financial_Stress", "Family_History_of_Mental_Illness", "Depression")]
+dim(StudentDep)
+```
+
+```{r}
+# Use only columns that have variation
+X <- StudentDep[, c("Age", "Academic_Pressure", "CGPA", "Financial_Stress")]
+Y <- StudentDep[, c("Study_Satisfaction")]
+
+# Converting to numeric variables
+X[] <- lapply(X, function(col) as.numeric((col)))
+Y <- as.data.frame(Y)
+colnames(Y) <- "Study_Satisfaction"
+Y[] <- lapply(Y, function(col) as.numeric((col)))
+
+
+# Removing rows with NA
+X <- na.omit(X)
+Y <- na.omit(Y)
+
+# Correlation matrices
+RX <- cor(X, use = "pairwise.complete.obs")
+
+# Eigenvalues
+EigX <- eigen(RX)
+EigX$values
+
+```
+
+
+```{r}
+# PCA 
+PCA_X <- pca(r = RX, nfactors = 2, rotate = "varimax")$loadings
+PCA_X
+```
+
+```{r}
+#Variance 
+Var <- (EigX$values / sum(EigX$values)) * 100
+Var
+
+CummulVar_f2 <- Var[1] + Var[2]
+CummulVar_f2
+# Scree Plot 
+plot(EigX$values, type = "b", main = "Scree Plot", 
+     xlab = "Component", ylab = "Eigenvalue")
+
+# Communalities
+communalities <- rowSums(PCA_X^2)
+communalities
+```
+
+Interperting Variance and Covariance:
+ We used PCA with a varimax rotation. This analysis gave us 2 main components that together explain 60.46% of the total variance from our four original variables: 
+Age, Academic Pressure, CGPA, and Financial Stress. The first component, RC1, primarily represents Academic Pressure and Financial Stress. The second component, RC2, 
+is mainly represented by Age and CGPA. We added a scree plot that also agrees with our loadings. The scree plot confirms that two components are optimal, as shown by the 
+elbow after the second point where the eigenvalues begin to level off. By using these 2 components, we keep 60.46% of the original information, meaning about 39.54% is lost. 
+While this isn't a huge amount of data loss, it is something to watch out for. The communalities tell us how well each variable is captured by the two components. We found 
+that CGPA and Academic Pressure are represented the best, while Financial Stress and Age lose a bit more of their unique information. In short, the PCA simplified our four 
+variables into two main themes: one for stress factors and one for academic performance.
