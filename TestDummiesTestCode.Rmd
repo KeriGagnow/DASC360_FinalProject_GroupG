@@ -16,13 +16,16 @@ Importing our dataset into R Markdown:
 library(readr)
 
 student_depression_dataset_CSV <- read_csv("student_depression_dataset_CSV.csv")
-
+student_depression_dataset_CSV<- student_depression_dataset_CSV[, -4]
+student_depression_dataset_CSV<- student_depression_dataset_CSV[, -12]
+ 
+ 
 View(student_depression_dataset_CSV)
 ```
 We found a data set that analyzes mental health trends and predictors among students, which we ended up naming to StudentDep. We reorganized the data so it has 70 cases and 17 variables. Our goal was to make sure that the variables was layed out properly and in a better fit so we could analyze.
 
 ```{r}
-StudentDep <- student_depression_dataset_CSV[1:70, c("Gender", "Age", "City", "Profession", "Academic_Pressure", "Work_Pressure", "CGPA", "Study_Satisfaction", "Job_Satisfaction", "Sleep_Duration", "Dietary_Habits", "Degree", "Suicidal_Thoughts", "Work/Study_Hours", "Financial_Stress", "Family_History_of_Mental_Illness", "Depression")]
+StudentDep <- student_depression_dataset_CSV[1:70, c("Gender", "Age", "Profession", "Academic_Pressure", "Work_Pressure", "CGPA", "Study_Satisfaction", "Job_Satisfaction", "Sleep_Duration", "Dietary_Habits", "Suicidal_Thoughts", "Work/Study_Hours", "Financial_Stress", "Family_History_of_Mental_Illness", "Depression")]
 dim(StudentDep)
 ```
 
