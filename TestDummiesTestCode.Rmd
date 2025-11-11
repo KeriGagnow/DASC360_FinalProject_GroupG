@@ -49,7 +49,7 @@ StudentDep$ 'Sleep_Duration' <- as.numeric(factor(StudentDep$ 'Sleep_Duration',
 # Converting Depression, for binary levels. Yes = 1 and No = 0
 StudentDep$Depression <- ifelse(StudentDep$Depression == "Yes", 1, 0)
 
-
+StudentDep <- fastDummies::dummy_cols(StudentDep)
 
 
 str(StudentDep)
