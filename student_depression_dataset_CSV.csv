@@ -1,4 +1,4 @@
-id,Gender,Age,City,Profession,Academic_Pressure,Work_Pressure,CGPA,Study_Satisfaction,Job_Satisfaction,Sleep_Duration,Dietary_Habits,Degree,Suicidal_Thoughts,Work/Study_Hours,Financial_Stress,Family_History_of_Mental_Illness,Depression
+﻿id,Gender,Age,City,Profession,Academic_Pressure,Work_Pressure,CGPA,Study_Satisfaction,Job_Satisfaction,Sleep_Duration,Dietary_Habits,Degree,Suicidal_Thoughts,Work/Study_Hours,Financial_Stress,Family_History_of_Mental_Illness,Depression
 2,Male,33,Visakhapatnam,Student,5,0,8.97,2,0,'5-6 hours',Healthy,B.Pharm,Yes,3,1,No,1
 8,Female,24,Bangalore,Student,2,0,5.9,5,0,'5-6 hours',Moderate,BSc,No,3,2,Yes,0
 26,Male,31,Srinagar,Student,3,0,7.03,5,0,'Less than 5 hours',Healthy,BA,No,9,1,Yes,0

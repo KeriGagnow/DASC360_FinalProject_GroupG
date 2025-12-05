@@ -34,24 +34,21 @@ What we did here is converted the categorical variables into numerical form, suc
 ```{r}
 # Making sure to change Gender to binary so its Males = 1, and Female = 0
 StudentDep$Gender <- ifelse(StudentDep$Gender == "Male", 1, 0)
-
+ 
 # Also doing this for Family History of Mental Illness converting, binary (Yes = 1, No = 0)
-StudentDep$'Family_History_of_Mental_Illness' <- ifelse(StudentDep$'Family_History_of_Mental_Illness' == "Yes", 1, 0)
-
+StudentDep$Family_History_of_Mental_Illness <- ifelse(StudentDep$Family_History_of_Mental_Illness == "Yes", 1, 0)
+ 
 # Converting ordinal variables for Dietary Habits and Sleep Duration
-StudentDep$ 'Dietary_Habits' <- as.numeric(factor(StudentDep$ 'Dietary_Habits',
-                                                  levels = c("Unhealthy", "Average", "Healthy"),
+StudentDep$Dietary_Habits <- as.numeric(factor(StudentDep$Dietary_Habits,
+                                                  levels = c("Unhealthy", "Moderate", "Healthy"),
                                                   ordered = TRUE))
-StudentDep$ 'Sleep_Duration' <- as.numeric(factor(StudentDep$ 'Sleep_Duration',
-                                                  levels = c("<5 hours", "5-6 hours", "6-8 hours", ">8 hours"),
+StudentDep$Sleep_Duration <- as.numeric(factor(StudentDep$Sleep_Duration,
+                                                  levels = c("'Less than 5 hours'", "'5-6 hours'", "'7-8 hours'", "'More than 8 hours'"),
                                                   ordered = TRUE))
-
+ 
 # Converting Depression, for binary levels. Yes = 1 and No = 0
-StudentDep$Depression <- ifelse(StudentDep$Depression == "Yes", 1, 0)
-
-
-
-
+#StudentDep$Depression <- ifelse(StudentDep$Depression == "Yes", 1, 0)
+ 
 str(StudentDep)
 
 
@@ -76,11 +73,11 @@ For here we made sure to have variables that are predictors, and variables that 
 
 ```{r}
 # Predictor Variables
-X <- StudentDep[, c("Gender", "Age", "Academic_Pressure", "Work_Pressure",
+X <- StudentDep[, c("Gender", "Age", "Academic_Pressure", 
                     "CGPA", "Dietary_Habits", "Financial_Stress",
                     "Family_History_of_Mental_Illness")]
 # Response Variables
-Y <- StudentDep[, c("Depression", "Study_Satisfaction", "Job_Satisfaction", "Sleep_Duration")]
+Y <- StudentDep[, c("Depression", "Study_Satisfaction", "Sleep_Duration")]
 ```
 Used summary instead of describe()
 
@@ -138,6 +135,7 @@ Corr
 ```{r}
 # Scatter Plot
 pairs(Data, pch = 19, main = "Scatter Plot")
+
 ```
 ```{r}
 # Correlation Plot
@@ -179,7 +177,7 @@ When using the Mahalanobis distance and the use of scattterplots, we wanted to o
 
 ```{r}
 # Predictor Variables
-X <- StudentDep[, c("Gender", "Age", "Academic_Pressure", "Work_Pressure", "CGPA", "Dietary_Habits", "Financial_Stress", "Family_History_of_Mental_Illness")]
+X <- StudentDep[, c("Gender", "Age", "Academic_Pressure", "CGPA", "Dietary_Habits", "Financial_Stress", "Family_History_of_Mental_Illness")]
 
 # Response Variables
 Y <- StudentDep[, c("Depression", "Study_Satisfaction", "Job_Satisfaction", "Sleep_Duration")]
@@ -198,16 +196,20 @@ X <- X[, vars > 0]
 varsY <- sapply(Y, var, na.rm = TRUE)
 Y <- Y[, !is.na(varsY) & varsY > 0]
 
+Y
+
 # Correlation matrices
 RX <- cor(X, use = "pairwise.complete.obs")
+RY <- cor(Y, use = "pairwise.complete.obs")
+
 
 
 # Eigenvalues
 EigX <- eigen(RX)
-
+EigY <- eigen(RY)
 
 EigX$values
-
+EigY$values
 ```
 
 We will be using the Principal Component Analysis to see if an oblique or orthogonal rotation will be necessary for this data set. We will be setting our intrinsic dimensionality to be 4 for the Predictors, note that we were not able to find the loading matrices for the response variables as they were returning 0 despite all attempts

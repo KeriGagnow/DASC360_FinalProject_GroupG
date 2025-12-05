@@ -26,6 +26,8 @@ We found a data set that analyzes mental health trends and predictors among stud
 
 ```{r}
 StudentDep <- student_depression_dataset_CSV[1:70, c("Gender", "Age", "Profession", "Academic_Pressure", "Work_Pressure", "CGPA", "Study_Satisfaction", "Job_Satisfaction", "Sleep_Duration", "Dietary_Habits", "Suicidal_Thoughts", "Work/Study_Hours", "Financial_Stress", "Family_History_of_Mental_Illness", "Depression")]
+student_depression_dataset_CSV<- student_depression_dataset_CSV[, -4]
+ 
 dim(StudentDep)
 ```
 

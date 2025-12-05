@@ -1,0 +1,23 @@
+---
+title: "Group Final Report Draft"
+author: "Oksana Efron, Sabrina Hassan, Keri Gagnow"
+date: "2025-11-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(readr)
+library(psych)
+library(corrplot)
+library(ggplot2)
+```
+
+We wanted to explore the mental health effects on college students in India as India is one of those prevelent countries with high mental health and sucidial rates, along side China, South Korea, Japan and many more. This dataset contains nmore than 28,000 test cases and 18 variables, which will be slimmed down later for readability purposes. Throughout the exploratory data analysis, we will be analysing the effects of Academic Stress, Finanical Stress, any Family History of Mental Health 
+```{r} 
+library(readr)
+
+student_depression_dataset_CSV <- read_csv("student_depression_dataset_CSV.csv")
+
+View(student_depression_dataset_CSV)
+```
+
