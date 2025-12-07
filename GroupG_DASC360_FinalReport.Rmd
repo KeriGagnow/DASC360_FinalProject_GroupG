@@ -210,22 +210,34 @@ EigY <- eigen(RY)
 
 EigX$values
 EigY$values
+
+
+
+
 ```
 
-We will be using the Principal Component Analysis to see if an oblique or orthogonal rotation will be necessary for this data set. We will be setting our intrinsic dimensionality to be 4 for the Predictors, note that we were not able to find the loading matrices for the response variables as they were returning 0 despite all attempts
+We will be using the Principal Component Analysis to see if an oblique or orthogonal rotation will be necessary for this data set. We will be setting our intrinsic dimensionality to be 3 for both the predictors and response variables
 ```{r}
-R <- pca(r = RX, nfactors = 4, rotate = "varimax")$loadings[]
+R <- pca(r = RX, nfactors = 3, rotate = "varimax")$loadings[]
+R1 <- pca(r = RY, nfactors = 3, rotate = "varimax")$loadings[]
 print("Orthogonal Rotation :")
 R
+R1
 
-R_1 <- pca(r = RX, nfactors = 4, rotate = "oblimin")$loadings[]
+R_1 <- pca(r = RX, nfactors = 3, rotate = "oblimin")$loadings[]
+R_2 <- pca(r = RY, nfactors = 3, rotate = "oblimin")$loadings[]
 
 print("Oblique Rotation :")
 R_1
+R_2
 ```
+After further analysis of both rotations, we have determined that Orthogonal Rotation will be sufficient in this scenario as the Oblique rotation made the dimensions for the response variables unnecessarily more complex, which the end goal was to reduce the number of complex dimensions with orthogonal or oblique rotation
 We will also use correlation plots to visually identify complex dimensions with our rotated loading matrices:
 ```{r}
 corrplot(R, method = "circle")
+
+
+corrplot(R1, method = "circle")
 
 
 corrplot(R_1, method = "circle")
