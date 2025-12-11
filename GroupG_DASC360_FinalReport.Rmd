@@ -10,6 +10,7 @@ library(readr)
 library(psych)
 library(corrplot)
 library(ggplot2)
+library(lavaan)
 ```
 Importing our dataset into R Markdown:
 ```{r}
@@ -267,5 +268,23 @@ elbow after the second point where the eigenvalues begin to level off. By using 
 While this isn't a huge amount of data loss, it is something to watch out for. The communalities tell us how well each variable is captured by the two components. We found 
 that CGPA and Academic Pressure are represented the best, while Financial Stress and Age lose a bit more of their unique information. In short, the PCA simplified our four 
 variables into two main themes: one for stress factors and one for academic performance.
+```{r}
+EQN <- '
+  # Measurement model (Factor Definition)
+  
+  DepressionFactor =~ Academic_Pressure + Family_History_of_Mental_Illness + Depression
+  Study_SatisfactionFactor =~ Study_Satisfaction + Financial_Stress + Age
+  Sleep_DurationFactor =~ Gender + CGPA + Sleep_Duration + Dietary_Habits
+  # Measurment Model (Covariance Specification)
+  DepressionFactor ~~ Sleep_DurationFactor
+  # Structural Model
+  Sleep_DurationFactor ~ Study_SatisfactionFactor
+'
+fit <- sem(EQN, data = Data, std.lv = TRUE)
 
+summary(fit, standardized = TRUE)
+
+
+fitmeasures(fit)
+```
 
