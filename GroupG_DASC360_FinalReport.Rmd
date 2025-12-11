@@ -11,6 +11,7 @@ library(psych)
 library(corrplot)
 library(ggplot2)
 library(lavaan)
+library(knitr)
 ```
 Importing our dataset into R Markdown:
 ```{r}
@@ -269,6 +270,9 @@ While this isn't a huge amount of data loss, it is something to watch out for. T
 that CGPA and Academic Pressure are represented the best, while Financial Stress and Age lose a bit more of their unique information. In short, the PCA simplified our four 
 variables into two main themes: one for stress factors and one for academic performance.
 ```{r}
+include_graphics(path = "C:/Users/Keri/OneDrive - University of St. Thomas/DASC360 Final Project/DASC360_FinalProject_GroupG/image.png")
+```
+```{r}
 EQN <- '
   # Measurement model (Factor Definition)
   
@@ -285,6 +289,19 @@ fit <- sem(EQN, data = Data, std.lv = TRUE)
 summary(fit, standardized = TRUE)
 
 
+```
+Identifying and discussing significant predictors and response variables
+According to the regression coefficient output from the SEM model, only the statistically significant predictor was detected. Within the measurement model, Study_Satisfaction significantly loaded onto the Study_SatisfactionFactor (Estimate = -0.597, Z = -2.110, P = 0.035), showing that lower levels of reported study satisfaction are associated with higher levels of the latent study satisfaction factor. All other factor loading's such as Academic_Pressure, Family_History_of_Mental_Illness, Depression, Financial_Stress, Age, Gender, CGPA, Sleep_Duration, and Dietary_Habits were not statistically significant, as their p-values were all far above 0.05. In the structural model, Study_SatisfactionFactor did not significantly predict Sleep_DurationFactor (Estimate = 0.102, P = 0.968), illustrating no meaningful relationships between these latent constructs. The covariances among the latent variables were also non-significant (all P > 0.95). Overall, Study_Satisfaction was the only significant predictor in the model, while all other predictors and paths failed to reach statistical significance.
+
+```{r}
 fitmeasures(fit)
 ```
+Looking at our fit indices, we will be looking at the MFI, PGFI, RMSEA and NNFI to determine if the fit indices models are a good fit for our original data. 
 
+First starting with our MFI, we can using our 0.90 threshold, we can determine that the MFI model is a good fit for our model as the MFI value of 0.959 is above our threshold, making it a good fit for the data.
+
+Next off is our PGFI, and with the value of 0.525, we can determine that the PGFI is not a good fit for our model as the threshold follows a similar rule of AGFI, which is greater than or equal to 0.9, making the AGFI model not a good fit for our data.
+
+After that is RMSEA and since the RMSEA index encouraging for data to be less than or equal to 0.8, we can determine that RMSEA is a good model fit for our data as our RMSEA value of 0.051 is well below the 0.8 threshold, as smaller is better for this particular model.
+
+Finally NNFI, and following a greater than or equal to threshold of 0.95 and unfortunately NNFI is not a good fit for our model as our NNFI index is 0.813, which is .14 away from meeting the index threshold. Because of that, we can show that NNFI is not a good model fit for our data.
